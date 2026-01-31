@@ -3,7 +3,7 @@ from typing import Optional
 
 @dataclass
 class ScanResult:
-    destination_host: str
+    target_url: str
     description: str
     vulnerability: str
     severity: str
