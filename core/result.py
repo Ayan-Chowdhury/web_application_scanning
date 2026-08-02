@@ -1,12 +1,13 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Dict, Any
 
 @dataclass
 class ScanResult:
     target_url: str
-    description: str
     vulnerability: str
-    severity: str
-    confidence: float
+    severity: str              # Low/Medium/High/Critical
+    confidence: float          # 0.0 to 1.0
+    description: str
     recommendation: str
-    evidence: Optional[str]=None
+    evidence: Optional[str] = None
+    extra: Optional[Dict[str, Any]] = None
