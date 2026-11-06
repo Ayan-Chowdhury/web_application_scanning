@@ -1,0 +1,39 @@
+{
+    "risk_score": 10,
+    "total_findings": 3,
+    "results": [
+        {
+            "target_url": "https://marketmapping.radisoftplus.com",
+            "vulnerability": "Missing Security Header",
+            "severity": "Medium",
+            "confidence": 0.9,
+            "description": "CSP not implemented: Content-Security-Policy",
+            "recommendation": "Add 'Content-Security-Policy' header in server configuration.",
+            "evidence": "Header 'Content-Security-Policy' not found in response.",
+            "extra": null
+        },
+        {
+            "target_url": "https://marketmapping.radisoftplus.com",
+            "vulnerability": "Missing Security Header",
+            "severity": "Medium",
+            "confidence": 0.9,
+            "description": "Permissions Policy not implemented: Permissions-Policy",
+            "recommendation": "Add 'Permissions-Policy' header in server configuration.",
+            "evidence": "Header 'Permissions-Policy' not found in response.",
+            "extra": null
+        },
+        {
+            "target_url": "https://marketmapping.radisoftplus.com",
+            "vulnerability": "Technology Fingerprinting",
+            "severity": "Info",
+            "confidence": 0.95,
+            "description": "Technology stack info disclosed in headers.",
+            "recommendation": "Consider removing or minimizing Server/X-Powered-By headers.",
+            "evidence": "Server: nginx/1.24.0 (Ubuntu)",
+            "extra": {
+                "server": "nginx/1.24.0 (Ubuntu)",
+                "x_powered_by": null
+            }
+        }
+    ]
+}
