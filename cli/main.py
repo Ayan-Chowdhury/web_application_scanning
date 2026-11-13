@@ -111,8 +111,8 @@ def main():
 
     result = scanner.scan()
 
-    if not result:
-        print("No findings detected.")
+    if not isinstance(result, dict):
+        print("Invalid scan report returned.")
         return
 
     print_execution(

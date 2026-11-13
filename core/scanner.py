@@ -1,8 +1,10 @@
+
 from core.http_client import HttpClient
 from core.engine import ScanEngine
 
 from analyzers.headers import HeaderAnalyzer
 from analyzers.network.port_scanner import PortScanner
+from analyzers.network.subdomain_scanner import SubdomainScanner
 
 
 class Scanner:
@@ -12,33 +14,66 @@ class Scanner:
         self.target_url = target_url
 
         self.client = HttpClient()
-
         self.engine = ScanEngine()
 
-        # Phase 1
-        self.engine.register(
-            HeaderAnalyzer()
-        )
+        # Phase 1: Security Headers
+        self.engine.register(HeaderAnalyzer())
 
-        # Phase 3.1
-        self.engine.register(
-            PortScanner()
-        )
+        # Phase 3.1: Port Scanner
+        self.engine.register(PortScanner())
+
+        # Phase 3.2: Subdomain Enumeration
+        self.engine.register(SubdomainScanner())
 
     def scan(self):
 
-        response = self.client.get(
-            self.target_url
-        )
+        response = self.client.get(self.target_url)
 
         if response is None:
-            return []
+            return {
+                "execution": [],
+                "findings": []
+            }
 
-        findings = self.engine.run(
-            response
-        )
+        findings = self.engine.run(response)
 
-        return findings
+        return {
+            "execution": self.engine.get_execution_results(),
+            "findings": findings
+        }
+# from core.http_client import HttpClient
+# from core.engine import ScanEngine
+#
+# from analyzers.headers import HeaderAnalyzer
+# from analyzers.network.port_scanner import PortScanner
+#
+#
+# class Scanner:
+#
+#     def __init__(self, target_url):
+#
+#         self.target_url = target_url
+#
+#         self.client = HttpClient()
+#
+#         self.engine = ScanEngine()
+#
+#         # Phase 1
+#         self.engine.register(HeaderAnalyzer())
+#
+#         # Phase 3.1
+#         self.engine.register(PortScanner())
+#
+#     def scan(self):
+#
+#         response = self.client.get(self.target_url)
+#
+#         if response is None:
+#             return []
+#
+#         findings = self.engine.run(response)
+#
+#         return findings
 
 # from core.http_client import HttpClient
 # from core.engine import ScanEngine
