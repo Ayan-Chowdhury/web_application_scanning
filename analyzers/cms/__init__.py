@@ -1,0 +1,2 @@
+from .wordpress_detector import WordPressDetector
+from .multi_cms_detector import MultiCMSDetector

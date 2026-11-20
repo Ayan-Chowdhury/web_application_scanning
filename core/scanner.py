@@ -5,7 +5,8 @@ from core.engine import ScanEngine
 from analyzers.headers import HeaderAnalyzer
 from analyzers.network.port_scanner import PortScanner
 from analyzers.network.subdomain_scanner import SubdomainScanner
-
+from analyzers.cms import WordPressDetector, MultiCMSDetector
+from analyzers.tls import  SSLTLSAnalyzer
 
 class Scanner:
 
@@ -24,6 +25,12 @@ class Scanner:
 
         # Phase 3.2: Subdomain Enumeration
         self.engine.register(SubdomainScanner())
+        #Phase 3.3: Wordpress Detector
+        self.engine.register(WordPressDetector())
+        # Phase 3.4: Multi CMS Detector
+        self.engine.register(MultiCMSDetector())
+        # Phase 3.5: SSL/TLS Detector
+        self.engine.register(SSLTLSAnalyzer())
 
     def scan(self):
 
